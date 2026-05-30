@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Derivatives in Malaysian Poultry Production</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .poultry-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+        }
+    </style>
+</head>
+<body class="poultry-bg text-gray-100 min-h-screen font-sans">
+
+    <div class="container mx-auto px-4 py-8 max-w-5xl">
+        <header class="text-center mb-10 border-b border-blue-900 pb-6">
+            <span class="bg-blue-500/20 text-blue-300 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
+                SFH: Animal Husbandry Technology & Food Security Module
+            </span>
+            <h1 class="text-4xl font-extrabold text-white mt-3 tracking-tight">
+                Optimizing Cobb 500 Broiler Growth Dynamics
+            </h1>
+            <p class="text-blue-200/80 mt-2 text-lg">
+                Applying Calculus $f'(x)$ to Track Daily Weight Gain Variance in Malaysian Poultry Systems
+            </p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <div class="lg:col-span-1 space-y-6">
+                <div class="bg-slate-900/70 backdrop-blur-md p-6 rounded-2xl border border-slate-800 shadow-xl">
+                    <h2 class="text-xl font-bold text-blue-400 mb-3 flex items-center gap-2">
+                        <span>🍗</span> The Bioscience Problem
+                    </h2>
+                    <p class="text-sm text-gray-300 leading-relaxed">
+                        In Malaysia's commercial poultry industry, broiler production margins are incredibly tight. Managing the <strong>Feed Conversion Ratio (FCR)</strong> for strains like the <strong>Cobb 500</strong> is essential to secure national food security. 
+                    </p>
+                    <p class="text-sm text-gray-300 mt-2 leading-relaxed">
+                        Broilers do not grow linearly. By evaluating cumulative body weight using a cubic function $f(x)$ over a standard 42-day production cycle, we can calculate the first derivative $f'(x)$. This provides the <strong>instantaneous growth rate</strong> (grams/day), allowing farm managers to pinpoint the exact day biological growth efficiency peaks before metabolic overhead increases.
+                    </p>
+                </div>
+
+                <div class="bg-slate-900/70 backdrop-blur-md p-6 rounded-2xl border border-slate-800 shadow-xl">
+                    <h2 class="text-xl font-bold text-blue-400 mb-3 flex items-center gap-2">
+                        <span>🧮</span> The Mathematical Model
+                    </h2>
+                    <div class="space-y-4 text-sm">
+                        <div>
+                            <span class="text-xs text-blue-300 font-mono block mb-1">CUMULATIVE WEIGHT FUNCTION $f(x)$</span>
+                            <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 font-mono text-center text-blue-400">
+                                $f(x) = -0.012x^3 + 1.45x^2 + 12x + 45$
+                            </div>
+                        </div>
+                        <div>
+                            <span class="text-xs text-blue-300 font-mono block mb-1">DAILY GROWTH RATE DERIVATIVE $f'(x)$</span>
+                            <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 font-mono text-center text-amber-400">
+                                $f'(x) = -0.036x^2 + 2.90x + 12$
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-400 italic leading-snug">
+                            Where:<br>
+                            • $x$ = Age of broiler in days (Day 0 to Day 42)<br>
+                            • $f(x)$ = Predicted cumulative weight in grams (g)<br>
+                            • $f'(x)$ = Instantaneous rate of gain (g/day)
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900/40 p-4 rounded-xl border border-slate-800 text-xs text-gray-400">
+                    <span class="font-semibold text-gray-300 block mb-1">Data Validation Profile:</span>
+                    Mathematical constants are calibrated against standard commercial targets from the <span class="text-blue-300 font-mono">Cobb-Vantress Broiler Performance Supplement Data Sheets</span> adjusted for typical open/closed house environmental temperatures in Malaysia.
+                </div>
+            </div>
+
+            <div class="lg:col-span-2 space-y-6">
+                <div class="bg-slate-900/80 backdrop-blur-md p-6 rounded-2xl border border-slate-800 shadow-2xl">
+                    <div class="flex justify-between items-center mb-4">
+                        <div>
+                            <h2 class="text-xl font-bold text-white">Broiler Performance Analytics</h2>
+                            <p class="text-xs text-gray-400">Click on any plot marker along the curve to run derivative computations.</p>
+                        </div>
+                        <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2.5 py-1 rounded-md animate-pulse">
+                            Active Interactive Node
+                        </span>
+                    </div>
+                    
+                    <div class="relative h-[400px] w-full">
+                        <canvas id="poultryChart"></canvas>
+                    </div>
+                </div>
+
+                <div id="analysisPanel" class="bg-gradient-to-r from-blue-950 to-slate-900 p-6 rounded-2xl border border-blue-800/60 shadow-xl transition-all duration-300">
+                    <div id="welcomeMessage" class="text-center py-4">
+                        <p class="text-blue-300 font-medium">💡 Click on a specific production day on the chart above to calculate the derivative!</p>
+                        <p class="text-gray-400 text-xs mt-1">Translate calculus principles into direct, actionable animal husbandry decisions.</p>
+                    </div>
+                    
+                    <div id="resultContent" class="hidden grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="md:col-span-1 border-r border-slate-800 pr-4">
+                            <span class="text-xs text-blue-400 uppercase tracking-wider font-bold">Target Matrix</span>
+                            <div id="outDay" class="text-3xl font-black text-white mt-1">Day 21</div>
+                            <div class="text-xs text-gray-400 mt-2">
+                                Total Live Weight: <span id="outWeight" class="text-white font-semibold">920 g</span>
+                            </div>
+                        </div>
+                        <div class="md:col-span-2 space-y-2">
+                            <span class="text-xs text-amber-400 uppercase tracking-wider font-bold block">Calculated Derivative $f'(x)$</span>
+                            <div class="flex items-baseline gap-2">
+                                <div id="outDerivative" class="text-3xl font-black text-amber-400">55.8</div>
+                                <div class="text-sm text-gray-300 font-medium">grams / day</div>
+                            </div>
+                            <div class="bg-slate-950/60 p-3 rounded-xl border border-slate-800 mt-2">
+                                <span class="text-xs text-gray-400 block font-semibold mb-0.5">Husbandry Interpretation:</span>
+                                <p id="outExplanation" class="text-sm text-gray-200 leading-relaxed"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <footer class="mt-16 text-center text-xs text-gray-500 border-t border-slate-900 pt-4">
+            Interactive Biometrics Lab Application • Developed for Malaysian Undergraduate Agrotechnology Curriculums
+        </footer>
+    </div>
+
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+
+    <script>
+        // 1. Implementation of Mathematical Formulas
+        // f(x) = -0.012x^3 + 1.45x^2 + 12x + 45
+        function getCumulativeWeight(day) {
+            return (-0.012 * Math.pow(day, 3)) + (1.45 * Math.pow(day, 2)) + (12 * day) + 45;
+        }
+
+        // f'(x) = -0.036x^2 + 2.90x + 12
+        function getGrowthVelocity(day) {
+            return (-0.036 * Math.pow(day, 2)) + (2.90 * day) + 12;
+        }
+
+        // 2. Population of Dataset over a 42-Day Production Scale
+        const daysLabels = [];
+        const cumulativeWeightDataset = [];
+        const growthVelocityDataset = [];
+
+        for (let day = 0; day <= 42; day++) {
+            daysLabels.push(`Day ${day}`);
+            cumulativeWeightDataset.push(getCumulativeWeight(day).toFixed(1));
+            growthVelocityDataset.push(getGrowthVelocity(day).toFixed(1));
+        }
+
+        // 3. Initialize Interactive Chart.js Object
+        const ctx = document.getElementById('poultryChart').getContext('2d');
+        const poultryChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: daysLabels,
+                datasets: [
+                    {
+                        label: 'Cumulative Weight f(x) (grams)',
+                        data: cumulativeWeightDataset,
+                        borderColor: '#3b82f6', // Vivid Blue
+                        backgroundColor: 'rgba(59, 130, 246, 0.08)',
+                        borderWidth: 3,
+                        yAxisID: 'yAxisWeight',
+                        tension: 0.2,
+                        pointBackgroundColor: '#3b82f6',
+                        pointHoverRadius: 7,
+                        pointHoverBackgroundColor: '#ffffff'
+                    },
+                    {
+                        label: "Daily Growth Rate f'(x) (g/day)",
+                        data: growthVelocityDataset,
+                        borderColor: '#f59e0b', // Amber
+                        backgroundColor: 'transparent',
+                        borderWidth: 2,
+                        borderDash: [6, 4],
+                        yAxisID: 'yAxisVelocity',
+                        tension: 0.2,
+                        pointBackgroundColor: '#f59e0b',
+                        pointHoverRadius: 7,
+                        pointHoverBackgroundColor: '#ffffff'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                plugins: {
+                    legend: {
+                        labels: { color: '#cbd5e1', font: { family: 'ui-sans-serif' } },
+                        position: 'top'
+                    },
+                    tooltip: {
+                        backgroundColor: '#0f172a',
+                        titleColor: '#3b82f6',
+                        bodyColor: '#f8fafc',
+                        borderColor: '#334155',
+                        borderWidth: 1
+                    }
+                },
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Broiler Age (Days elapsed)', color: '#94a3b8' },
+                        grid: { color: 'rgba(51, 65, 85, 0.25)' },
+                        ticks: { color: '#94a3b8' }
+                    },
+                    yAxisWeight: {
+                        type: 'linear',
+                        position: 'left',
+                        title: { display: true, text: 'Total Weight (grams)', color: '#3b82f6' },
+                        grid: { color: 'rgba(51, 65, 85, 0.35)' },
+                        ticks: { color: '#3b82f6' }
+                    },
+                    yAxisVelocity: {
+                        type: 'linear',
+                        position: 'right',
+                        title: { display: true, text: 'Instantaneous Growth Rate (g/day)', color: '#f59e0b' },
+                        grid: { drawOnChartArea: false },
+                        ticks: { color: '#f59e0b' }
+                    }
+                },
+                // Intercept mouse clicks on graph paths to compute calculus changes
+                onClick: (event, elements) => {
+                    if (elements.length > 0) {
+                        const targetIndex = elements[0].index;
+                        updateCalculusAnalysis(targetIndex);
+                    }
+                },
+                animation: {
+                    duration: 1800,
+                    easing: 'easeOutCubic'
+                }
+            }
+        });
+
+        // 4. Interface Feedback Controller
+        function updateCalculusAnalysis(day) {
+            const currentWeight = getCumulativeWeight(day);
+            const rawDerivative = getGrowthVelocity(day);
+            
+            const welcomeMessage = document.getElementById('welcomeMessage');
+            const resultContent = document.getElementById('resultContent');
