@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Precision Poultry Analytics: Derivatives Experiment</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen font-sans antialiased">
+
+    <div class="h-2 bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500"></div>
+
+    <div class="container mx-auto px-4 py-10 max-w-6xl">
+        
+        <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 pb-6 border-b border-slate-200 gap-4">
+            <div>
+                <span class="text-xs font-bold uppercase tracking-widest text-teal-600 bg-teal-50 px-2.5 py-1 rounded-md border border-teal-200">
+                    SFH: Animal Husbandry Technology & Food Security
+                </span>
+                <h1 class="text-3xl font-black text-slate-900 mt-2 tracking-tight">
+                    Cobb 500 Broiler Growth Velocity Engine
+                </h1>
+                <p class="text-slate-500 text-sm mt-0.5">
+                    Utilizing calculus $f'(x)$ to optimize harvest windows in Malaysian poultry matrices.
+                </p>
+            </div>
+            <div class="flex items-center gap-2 bg-white p-2 rounded-xl shadow-xs border border-slate-200 text-xs text-slate-600">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                <strong>Status:</strong> Calibrated to Malaysian Open/Closed-House Systems
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <div class="lg:col-span-4 space-y-6">
+                
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs">
+                    <div class="flex items-center gap-3 mb-3 text-teal-700">
+                        <span class="p-2 bg-teal-50 rounded-lg text-lg">📊</span>
+                        <h2 class="font-bold text-lg text-slate-900">The Growth Efficiency Bottleneck</h2>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Broiler weight accumulation follows an S-curve (sigmoidal pattern). Calculating total body weight $f(x)$ alone isn't enough to prevent profit loss. 
+                    </p>
+                    <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                        By extracting the first derivative $f'(x)$, we find the <strong>instantaneous growth velocity</strong>. This identifies the exact turning point where feed-to-meat conversion degrades, protecting razor-thin operational margins from over-feeding costs.
+                    </p>
+                </div>
+
+                <div class="bg-gradient-to-br from-slate-900 to-slate-800 p-6 rounded-2xl text-white shadow-md relative overflow-hidden">
+                    <div class="absolute right-0 bottom-0 text-slate-700/20 text-9xl font-mono select-none pointer-events-none transform translate-x-8 translate-y-8">
+                        dx
+                    </div>
+                    <h3 class="text-xs font-bold text-cyan-400 tracking-wider uppercase mb-4">Calculus Mathematical Kernel</h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <span class="text-[10px] text-slate-400 block font-mono">BIOMASS EQUATION f(x)</span>
+                            <div class="bg-slate-950/60 p-2.5 rounded-lg border border-slate-700/50 font-mono text-sm text-center text-cyan-300">
+                                $f(x) = -0.012x^3 + 1.45x^2 + 12x + 45$
+                            </div>
+                        </div>
+                        <div>
+                            <span class="text-[10px] text-slate-400 block font-mono">INSTANTANEOUS VELOCITY f'(x)</span>
+                            <div class="bg-slate-950/60 p-2.5 rounded-lg border border-slate-700/50 font-mono text-sm text-center text-emerald-400">
+                                $f'(x) = -0.036x^2 + 2.90x + 12$
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 pt-4 border-t border-slate-700/50 text-[11px] text-slate-400 space-y-1">
+                        <div>• <strong class="text-slate-200">$x$:</strong> Age of broiler flock (0 to 42 Days)</div>
+                        <div>• <strong class="text-slate-200">$f(x)$:</strong> Predicted mass per bird (grams)</div>
+                        <div>• <strong class="text-slate-200">$f'(x)$:</strong> Instantaneous daily gain rate (g/day)</div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-100 p-4 rounded-xl border border-slate-200 text-[11px] text-slate-500">
+                    <span class="font-bold text-slate-700 block mb-1">Data Asset Validation Source:</span>
+                    Baseline parameters verified via standard performance metrics listed in the online <em>Cobb-Vantress Broiler Performance Supplement Reference Guides</em>.
+                </div>
+            </div>
+
+            <div class="lg:col-span-8 space-y-6">
+                
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs">
+                    <div class="flex justify-between items-center mb-4">
+                        <div>
+                            <h2 class="font-bold text-lg text-slate-900">Biometric Interactive Matrix</h2>
+                            <p class="text-xs text-slate-400">Hover over curves and click any production day node to run live calculus diagnostics.</p>
+                        </div>
+                    </div>
+                    <div class="relative h-[360px] w-full">
+                        <canvas id="poultryTelemetryChart"></canvas>
+                    </div>
+                </div>
+
+                <div id="telemetryPanel" class="bg-white rounded-2xl border-2 border-slate-200 p-6 shadow-sm transition-all duration-300">
+                    
+                    <div id="promptState" class="text-center py-6">
+                        <div class="w-10 h-10 bg-teal-50 text-teal-600 rounded-full flex items-center justify-center mx-auto mb-2 font-bold text-lg animate-bounce">
+                            🎯
+                        </div>
+                        <h4 class="text-sm font-bold text-slate-800">Telemetry Standby</h4>
+                        <p class="text-xs text-slate-400 mt-1">Click a point on the line chart above to calculate the instantaneous rate of change.</p>
+                    </div>
+
+                    <div id="analyticsState" class="hidden">
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Flock Telemetry Diagnostics</span>
+                            <span id="badgeStatus" class="text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase"></span>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                                <span class="text-[10px] text-slate-400 uppercase font-bold block">Selected Timeline Node</span>
+                                <span id="lblDay" class="text-2xl font-black text-slate-900 block mt-1">Day --</span>
+                                <span id="lblWeight" class="text-xs text-teal-600 font-medium block mt-1">Weight: --</span>
+                            </div>
+                            
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 md:col-span-2">
+                                <span class="text-[10px] text-slate-400 uppercase font-bold block">Calculated First Derivative $f'(x)$</span>
+                                <div class="flex items-baseline gap-2 mt-1">
+                                    <span id="lblDerivative" class="text-3xl font-black text-emerald-600">--</span>
+                                    <span class="text-xs font-semibold text-slate-500">grams / day velocity</span>
+                                </div>
+                                <div class="mt-3 pt-3 border-t border-slate-200/60">
+                                    <strong class="text-xs text-slate-700 block font-bold mb-0.5">Husbandry Reality Explanation:</strong>
+                                    <p id="lblExplanation" class="text-xs text-slate-600 leading-relaxed"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <footer class="mt-12 text-center text-[11px] text-slate-400 border-t border-slate-200 pt-4">
+            Agricultural Calculus Learning Sandbox • Built using Chart.js Core Architecture
+        </footer>
+    </div>
+
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+
+    <script>
+        // 1. Core Model Functions
+        function evaluateWeightFunction(x) {
+            return (-0.012 * Math.pow(x, 3)) + (1.45 * Math.pow(x, 2)) + (12 * x) + 45;
+        }
+
+        function evaluateDerivativeFunction(x) {
+            return (-0.036 * Math.pow(x, 2)) + (2.90 * x) + 12;
+        }
+
+        // 2. Data Arrays Construction
+        const timelineLabels = [];
+        const cumulativeWeightData = [];
+        const growthVelocityData = [];
+
+        for (let day = 0; day <= 42; day++) {
+            timelineLabels.push(day);
+            cumulativeWeightData.push(evaluateWeightFunction(day).toFixed(1));
+            growthVelocityData.push(evaluateDerivativeFunction(day).toFixed(1));
+        }
+
+        // 3. Chart.js Execution
+        const ctx = document.getElementById('poultryTelemetryChart').getContext('2d');
+        const poultryTelemetryChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: timelineLabels,
+                datasets: [
+                    {
+                        label: 'Cumulative Biomass f(x) (grams)',
+                        data: cumulativeWeightData,
+                        borderColor: '#06b6d4', // Cyan
+                        backgroundColor: 'rgba(6, 180, 212, 0.05)',
+                        borderWidth: 3,
+                        yAxisID: 'yAxisL',
+                        tension: 0.2,
+                        pointBackgroundColor: '#06b6d4',
+                        pointHoverRadius: 6
+                    },
+                    {
+                        label: "Growth Acceleration f'(x) (g/day)",
+                        data: growthVelocityData,
+                        borderColor: '#10b981', // Emerald
+                        backgroundColor: 'transparent',
+                        borderWidth: 2,
+                        borderDash: [4, 4],
+                        yAxisID: 'yAxisR',
+                        tension: 0.2,
+                        pointBackgroundColor: '#10b981',
+                        pointHoverRadius: 6
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { boxWidth: 12, font: { size: 11, weight: 'bold' }, color: '#334155' }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Broiler Production Lifespan (Days)', color: '#64748b', font: { size: 11, weight: 'bold' } },
+                        grid: { color: '#f1f5f9' }
+                    },
+                    yAxisL: {
+                        type: 'linear',
+                        position: 'left',
+                        title: { display: true, text: 'Cumulative Weight (g)', color: '#06b6d4', font: { size: 11, weight: 'bold' } },
+                        grid: { color: '#f1f5f9' }
+                    },
+                    yAxisR: {
+                        type: 'linear',
+                        position: 'right',
+                        title: { display: true, text: 'Instantaneous Change Velocity (g/day)', color: '#10b981', font: { size: 11, weight: 'bold' } },
+                        grid: { drawOnChartArea: false }
+                    }
+                },
+                onClick: (event, elements) => {
+                    if (elements.length > 0) {
+                        const targetIndex = elements[0].index;
+                        processTelemetryNode(targetIndex);
+                    }
+                }
+            }
+        });
+
+        // 4. Operational Diagnostics Controller
+        function processTelemetryNode(dayIndex) {
+            const day = timelineLabels[dayIndex];
+            const weight = evaluateWeightFunction(day);
+            const derivative = evaluateDerivativeFunction(day);
+
+            // Display UI updates
+            document.getElementById('promptState').classList.add('hidden');
+            const panel = document.getElementById('telemetryPanel');
+            const outputState = document.getElementById('analyticsState');
+            outputState.classList.remove('hidden');
+
+            // Apply calculated elements
+            document.getElementById('lblDay').innerText = `Day ${day}`;
+            document.getElementById('lblWeight').innerText = `Total Weight: ${weight.toFixed(1)} g`;
+            document.getElementById('lblDerivative').innerText = `+${derivative.toFixed(2)}`;
+
+            // UI Elements variables for style manipulation
+            const badge = document.getElementById('badgeStatus');
+            const explanation = document.getElementById('lblExplanation');
+
+            // Categorization and interactive conditional routing logic
+            if (day <= 10) {
+                panel.className = "bg-white rounded-2xl border-2 border-cyan-500 p-6 shadow-sm transition-all duration-300";
+                badge.className = "text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase bg-cyan-100 text-cyan-800";
+                badge.innerText = "Brooding Phase";
+                explanation.innerHTML = `During this early stage, the derivative value is low but rising. The chick is dedicating its metabolic energy to forming organs and skeletal structure. It is eating very little, but its rate of gain is accelerating day by day.`;
+            } else if (day > 10 && day <= 28) {
+                panel.className = "bg-white rounded-2xl border-2 border-emerald-500 p-6 shadow-sm transition-all duration-300";
+                badge.className = "text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase bg-emerald-100 text-emerald-800";
+                badge.innerText = "Peak Conversion Efficiency";
+                explanation.innerHTML = `The derivative value is surging dramatically, indicating high growth velocity. The bird is packing on an impressive <strong>${derivative.toFixed(1)} grams of body mass every 24 hours</strong>. Your feed formulation should be rich and precisely optimized right now to capitalize on this high-efficiency muscle-building window.`;
+            } else if (day > 28 && day <= 37) {
+                panel.className = "bg-white rounded-2xl border-2 border-amber-500 p-6 shadow-sm transition-all duration-300";
+                badge.className = "text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase bg-amber-100 text-amber-800";
+                badge.innerText = "Diminishing Returns Inflection";
+                explanation.innerHTML = `Look closely at the curves: though the total mass curve is still rising, the derivative curve has flattened and is now slanting down. This means the <em>rate</em> of growth is decelerating. The bird is beginning to use more feed for body maintenance and fat deposition rather than building muscle mass.`;
+            } else {
+                panel.className = "bg-white rounded-2xl border-2 border-rose-500 p-6 shadow-sm transition-all duration-300";
+                badge.className = "text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase bg-rose-100 text-rose-800";
+                badge.innerText = "Critical Harvest Window";
+                explanation.innerHTML = `The derivative value has dropped sharply. The broiler has hit its biological plateau and is consuming massive amounts of feed simply to sustain its current size. Keeping the birds active past this window wastes expensive feed and heavily damages your overall Feed Conversion Ratio (FCR). It is time to harvest and ship to the market.`;
+            }
+        }
+    </script>
+</body>
+</html>
